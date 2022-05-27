@@ -1,15 +1,10 @@
-package com.nzhang.messenger;
+package com.nzhang.messenger.gui;
 // model view controller
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.nzhang.messenger.MessengerApplication;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class MessengerController{
@@ -35,7 +30,8 @@ public class MessengerController{
                 System.out.println(text);
                 ChatDialog n = new ChatDialog();
                 n.setName(text);
-                ChatBox chatBox = new ChatBox();
+                ChatBox chatBox = new ChatBox(MessengerApplication.serviceMessenger.startDialog(text));
+                //chatBox.setDialog(MessengerApplication.serviceMessenger.startDialog(text));
                 chatBox.setChatName(text);
                 this.chatBox.getChildren().clear();
                 this.chatBox.getChildren().add(chatBox);

@@ -1,5 +1,10 @@
-package com.nzhang.messenger;
+package com.nzhang.messenger.gui;
 
+import com.nzhang.messenger.messages.Dialog;
+import com.nzhang.messenger.messages.Message;
+import com.nzhang.messenger.MessengerApplication;
+import com.nzhang.messenger.messages.Message;
+import com.nzhang.messenger.messages.MessengerService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,7 +29,10 @@ public class ChatBox extends Pane implements Initializable {
     @FXML
     ImageView dialogImage;
 
-    public ChatBox() {
+    public ChatBox(Dialog d) {
+
+        this.d = d;
+
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("chatBox.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -68,9 +76,10 @@ public class ChatBox extends Pane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            Dialog d = MessengerApplication.example();
+//        try {
+            //Dialog d = MessengerApplication.example();
             messages.addAll(d.getMessages());
+
             this.Messages.setItems(messages);
 
             this.Messages.setCellFactory(lv -> {
@@ -86,16 +95,21 @@ public class ChatBox extends Pane implements Initializable {
 //                    String text = String.valueOf(enterMessage.getText());
 //                    enterMessage.setText("");
 //                    System.out.println(text);
-                        chatBoxMessage.setTextFrom(true, item.text);
+                        chatBoxMessage.setTextFrom(true, item.getText());
                     }
                 };
                 return cell;
             });
 
-        } catch (Exception e) {
-            System.out.println("fucking chat");
-        }
+//        } catch (Exception e) {
+//            System.out.println("fucking chat");
+//        }
 
     }
 
+    Dialog d;
+
+    public void setDialog(Dialog startDialog) {
+        this.d = startDialog;
+    }
 }

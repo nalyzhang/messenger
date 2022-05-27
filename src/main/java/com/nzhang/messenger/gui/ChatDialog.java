@@ -1,4 +1,4 @@
-package com.nzhang.messenger;
+package com.nzhang.messenger.gui;
 
 import javafx.scene.image.Image;
 

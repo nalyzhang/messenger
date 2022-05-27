@@ -1,4 +1,4 @@
-package com.nzhang.messenger;
+package com.nzhang.messenger.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
