@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="538.0" prefWidth="555.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<!--<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">-->
    <children>
       <HBox fx:id="messageBox" prefHeight="69.0" prefWidth="406.0">
          <children>
@@ -21,4 +22,5 @@
          </children>
       </HBox>
    </children>
-</Pane>
+<!--</Pane>-->
+</fx:root>

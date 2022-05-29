@@ -1,4 +1,4 @@
-package com.nzhang.messenger.messages;
+package com.nzhang.messenger.messages.dialog;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ class Message {
     String text;
     int unixTime;
 
-    Message() {
+    public Message() {
 
     }
 
@@ -28,8 +28,9 @@ class Message {
         return unixTime;
     }
 
-    Message(String text, int unixTime) {
+    public Message(String text, int unixTime) {
         this.text = text;
         this.unixTime = unixTime;
     }
+
 }

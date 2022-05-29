@@ -1,4 +1,4 @@
-package com.nzhang.messenger.messages;
+package com.nzhang.messenger.messages.dialog;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

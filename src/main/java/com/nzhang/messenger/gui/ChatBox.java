@@ -1,10 +1,9 @@
 package com.nzhang.messenger.gui;
 
-import com.nzhang.messenger.messages.Dialog;
-import com.nzhang.messenger.messages.Message;
+import com.nzhang.messenger.messages.dialog.Dialog;
+import com.nzhang.messenger.messages.dialog.Message;
 import com.nzhang.messenger.MessengerApplication;
-import com.nzhang.messenger.messages.Message;
-import com.nzhang.messenger.messages.MessengerService;
+import com.nzhang.messenger.messages.dialog.DialogService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -67,7 +66,7 @@ public class ChatBox extends Pane implements Initializable {
     @FXML
     private ListView Messages;
 
-    MessengerService serviceMessenger = MessengerApplication.serviceMessenger;
+    DialogService serviceMessenger = MessengerApplication.dialogService;
 
 
     public final ObservableList<Message> messages = FXCollections.observableArrayList();
@@ -96,6 +95,7 @@ public class ChatBox extends Pane implements Initializable {
 //                    enterMessage.setText("");
 //                    System.out.println(text);
                         chatBoxMessage.setTextFrom(true, item.getText());
+                        setGraphic(chatBoxMessage);
                     }
                 };
                 return cell;

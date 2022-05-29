@@ -30,7 +30,7 @@ public class MessengerController{
                 System.out.println(text);
                 ChatDialog n = new ChatDialog();
                 n.setName(text);
-                ChatBox chatBox = new ChatBox(MessengerApplication.serviceMessenger.startDialog(text));
+                ChatBox chatBox = new ChatBox(MessengerApplication.dialogService.startDialog(text));
                 //chatBox.setDialog(MessengerApplication.serviceMessenger.startDialog(text));
                 chatBox.setChatName(text);
                 this.chatBox.getChildren().clear();

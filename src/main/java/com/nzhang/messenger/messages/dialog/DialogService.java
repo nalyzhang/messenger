@@ -1,18 +1,18 @@
-package com.nzhang.messenger.messages;
+package com.nzhang.messenger.messages.dialog;
 
-import com.nzhang.messenger.messages.Message;
-import com.nzhang.messenger.messages.Personality;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MessengerService {
+public class DialogService {
 
     @Autowired
-    private DialogRepository dialogRepository;
+    public DialogRepository dialogRepository;
+
+    @Autowired
+    public DialogRepository messageRepository;
 
     public Dialog getDialog(long id){
         return this.dialogRepository.getById(id);
@@ -36,27 +36,21 @@ public class MessengerService {
     public Dialog startDialog(String ip) {
 
         // 1. подключились по адресу
-        // got data from user
+        // предположим, что мы получили необходимую информацию
 
-        // we got unique identifier
-        // name, bop, photo
         Long UID = 99L;
         String name = "Olga";
-
-
-        // 2. Searching for dialog between you and me
-        Personality me = new Personality("Oleg", "oleg", null, "1", true);
+        // ... и т.д.
 
         List<Dialog> dialogs = dialogRepository.findByUID(UID);
         Dialog d;
         if (dialogs.size() == 0) {
+            // если мы общаемся в первый раз, то создаем новый диалог
             d = new Dialog(UID);
             d.setName(name);
-            // TODO:
-
+            // TODO: заполняем всю информацию
 
             d = dialogRepository.save(d);
-            d.addMessage(new Message("fucking message", 11));
 
         } else {
             d = dialogs.get(0);
@@ -64,6 +58,14 @@ public class MessengerService {
 
         return d;
 
+    }
+
+    public void sendMessage(Dialog d, Message m) {
+        //this.messageRepository.ad
+        d.messages.add(m);
+        this.dialogRepository.save(d);
+
+        // TODO: нам еще нужно отправить сообщение
 
     }
 }

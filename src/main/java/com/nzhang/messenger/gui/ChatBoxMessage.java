@@ -2,14 +2,18 @@ package com.nzhang.messenger.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class ChatBoxMessage {
+public class ChatBoxMessage extends Pane implements Initializable {
     @FXML
     HBox messageBox;
 
@@ -19,9 +23,10 @@ public class ChatBoxMessage {
     @FXML
     Image avatar;
 
-    void setTextFrom(boolean b, String text) {
+    ChatBoxMessage() {
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("chatTextFromMe.fxml"));
-        fxmlLoader.getRoot();
+        fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
             fxmlLoader.load();
@@ -29,6 +34,9 @@ public class ChatBoxMessage {
             e.printStackTrace();
         }
 
+    }
+
+    void setTextFrom(boolean b, String text) {
         if (!b) {
             this.messageBox.getChildren().get(0).toFront();
         }
@@ -36,4 +44,9 @@ public class ChatBoxMessage {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
 }

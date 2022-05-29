@@ -1,6 +1,4 @@
-package com.nzhang.messenger.messages;
-
-import com.nzhang.messenger.messages.Personality;
+package com.nzhang.messenger.messages.dialog;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -50,10 +48,10 @@ public class Dialog {
     //Image photo;
     String bio;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Message> messages;
 
-    Dialog(Long UID) {
+    public Dialog(Long UID) {
         this.UID = UID;
         this.messages = new ArrayList<>();
     }
@@ -62,9 +60,9 @@ public class Dialog {
         return messages;
     }
 
-    public void addMessage(Message m) {
-        this.messages.add(m);
-    }
+    //private void addMessage(Message m) {
+//        this.messages.add(m);
+//    }
 
 
 }

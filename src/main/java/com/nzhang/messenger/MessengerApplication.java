@@ -1,8 +1,7 @@
 package com.nzhang.messenger;
 
-import com.nzhang.messenger.messages.Dialog;
-import com.nzhang.messenger.messages.Message;
-import com.nzhang.messenger.messages.MessengerService;
+import com.nzhang.messenger.messages.dialog.DialogService;
+import com.nzhang.messenger.messages.personality.Personality;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,12 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 @SpringBootApplication
 public class MessengerApplication extends Application {
 
-    public static MessengerService serviceMessenger = new MessengerService();
+    public static DialogService dialogService = new DialogService();
+    public static Personality me;
 
     private static ApplicationContext context;
 
@@ -36,9 +35,9 @@ public class MessengerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         context = SpringApplication.run(MessengerApplication.class);
-        serviceMessenger = context.getBean(MessengerService.class);
+        dialogService = context.getBean(DialogService.class);
 
-        //example();
+        new TestInitializer().fillWithSampleData();
 
         FXMLLoader fxmlLoader = new FXMLLoader(MessengerApplication.class.getResource("messengerMainScene.fxml"));
         System.out.println(fxmlLoader.getLocation());
