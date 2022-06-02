@@ -19,6 +19,10 @@ class Personality {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    public Long getUID() {
+        return UID;
+    }
+
     // уникальный ID пользователя, который мы создаем, когда самый первый раз
     // входим в программу
     Long UID;

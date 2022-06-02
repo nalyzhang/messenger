@@ -69,6 +69,7 @@ public class ChatBox extends Pane implements Initializable {
     DialogService serviceMessenger = MessengerApplication.dialogService;
 
 
+
     public final ObservableList<Message> messages = FXCollections.observableArrayList();
 
 
@@ -76,8 +77,7 @@ public class ChatBox extends Pane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        try {
-            //Dialog d = MessengerApplication.example();
-            messages.addAll(d.getMessages());
+            messages.addAll(serviceMessenger.updateMessages(d));
 
             this.Messages.setItems(messages);
 

@@ -13,4 +13,5 @@ open module com.nzhang.messenger {
     requires org.hibernate.orm.core;
     requires spring.tx;
     requires java.desktop;
+    requires spring.web;
 }

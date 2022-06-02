@@ -2,12 +2,13 @@ package com.nzhang.messenger;
 
 import com.nzhang.messenger.messages.dialog.DialogService;
 import com.nzhang.messenger.messages.personality.Personality;
+import com.nzhang.messenger.messages.personality.PersonalityService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org..boot.aspringframeworkutoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
@@ -15,8 +16,33 @@ import java.io.IOException;
 @SpringBootApplication
 public class MessengerApplication extends Application {
 
+    /*
+
+    ааааааааа не слушаеца
+
+    = = = = = =
+    =  Vanya
+    =
+    =
+    =  ip адрес
+    = = = = = =
+
+    | getPersonalInformation   |  sendMessage
+    |     name                 |  text    |   "OK" (отчет об отправке)
+    |     bio                  |
+    \/    UID                  \/
+
+    = = = = = =
+    =  Petya
+    =
+    =
+    =
+    = = = = = =
+
+    */
+
     public static DialogService dialogService = new DialogService();
-    public static Personality me;
+    public static PersonalityService personalityService = new PersonalityService();
 
     private static ApplicationContext context;
 
@@ -35,7 +61,9 @@ public class MessengerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         context = SpringApplication.run(MessengerApplication.class);
+
         dialogService = context.getBean(DialogService.class);
+        personalityService = context.getBean(PersonalityService.class);
 
         new TestInitializer().fillWithSampleData();
 

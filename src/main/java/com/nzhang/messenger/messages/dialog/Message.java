@@ -1,9 +1,7 @@
 package com.nzhang.messenger.messages.dialog;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public
@@ -15,6 +13,9 @@ class Message {
 
     String text;
     int unixTime;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    Dialog dialog;
 
     public Message() {
 

@@ -1,8 +1,10 @@
 package com.nzhang.messenger.messages.dialog;
 
+import com.nzhang.messenger.MessengerApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -38,8 +40,9 @@ public class DialogService {
         // 1. подключились по адресу
         // предположим, что мы получили необходимую информацию
 
+
         Long UID = 99L;
-        String name = "Olga";
+        String name = "Nobody";
         // ... и т.д.
 
         List<Dialog> dialogs = dialogRepository.findByUID(UID);
@@ -61,11 +64,14 @@ public class DialogService {
     }
 
     public void sendMessage(Dialog d, Message m) {
-        //this.messageRepository.ad
+
         d.messages.add(m);
         this.dialogRepository.save(d);
-
         // TODO: нам еще нужно отправить сообщение
 
+    }
+
+    public List<Message> updateMessages(Dialog d) {
+        return d.getMessages();
     }
 }
