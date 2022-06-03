@@ -4,15 +4,14 @@ import com.nzhang.messenger.messages.dialog.Dialog;
 import com.nzhang.messenger.messages.dialog.Message;
 import com.nzhang.messenger.MessengerApplication;
 import com.nzhang.messenger.messages.dialog.DialogService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -28,9 +27,23 @@ public class ChatBox extends Pane implements Initializable {
     @FXML
     ImageView dialogImage;
 
+    @FXML
+    TextArea enterMessage;
+
+    @FXML
+    Button btnSendMessage;
+
+    @FXML
+    private ListView Messages;
+
+    //DialogService serviceMessenger = MessengerApplication.dialogService;
+
+    public final ObservableList<Message> messages = FXCollections.observableArrayList();
+
+    Dialog d;
+
     public ChatBox(Dialog d) {
 
-        this.d = d;
 
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("chatBox.fxml"));
         fxmlLoader.setRoot(this);
@@ -40,66 +53,73 @@ public class ChatBox extends Pane implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        MessengerApplication.dialogService.setChatBox(this);
+        setDialog(d);
+
     }
 
-    public void setChatName(String s) {
+    public void setDialog(Dialog d) {
+
+        this.d = d;
+
+        messages.addAll(d.getMessages());
+
         try {
-            if (s.equals("")) {
+            if (d.getName().equals("")) {
                 this.chatName.setText("Без названия");
             } else {
-                this.chatName.setText(s);
+                this.chatName.setText(d.getName());
             }
+
+            this.dialogImage.setImage(d.getPhoto());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
-
-    public void setChatImage(Image s) {
-        try {
-            this.dialogImage.setImage(s);
-        } catch (Exception e) {
-
-        }
-    }
-
-
-    @FXML
-    private ListView Messages;
-
-    DialogService serviceMessenger = MessengerApplication.dialogService;
-
-
-
-    public final ObservableList<Message> messages = FXCollections.observableArrayList();
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        try {
-            messages.addAll(serviceMessenger.updateMessages(d));
 
-            this.Messages.setItems(messages);
 
-            this.Messages.setCellFactory(lv -> {
-                ListCell<Message> cell = new ListCell<Message>() {
+        this.Messages.setItems(messages);
 
-                    @Override
-                    public void updateItem(Message item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty){
-                            return;
-                        }
-                        ChatBoxMessage chatBoxMessage = new ChatBoxMessage();
+        this.Messages.setCellFactory(lv -> {
+            ListCell<Message> cell = new ListCell<Message>() {
+
+                @Override
+                public void updateItem(Message item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        return;
+                    }
+                    ChatBoxMessage chatBoxMessage = new ChatBoxMessage();
 //                    String text = String.valueOf(enterMessage.getText());
 //                    enterMessage.setText("");
 //                    System.out.println(text);
-                        chatBoxMessage.setTextFrom(true, item.getText());
-                        setGraphic(chatBoxMessage);
-                    }
-                };
-                return cell;
-            });
+                    chatBoxMessage.setTextFrom(true, item.getText());
+                    setGraphic(chatBoxMessage);
+                }
+            };
+            return cell;
+        });
+
+        this.btnSendMessage.setOnAction(event -> {
+
+            String text = String.valueOf(enterMessage.getText());
+            System.out.println(text);
+
+            Message m = new Message(text, (int)(System.currentTimeMillis() / 1000L));
+            MessengerApplication.dialogService.sendMessage(this.d, m);
+
+            this.messages.add(m);
+
+        });
 
 //        } catch (Exception e) {
 //            System.out.println("fucking chat");
@@ -107,9 +127,13 @@ public class ChatBox extends Pane implements Initializable {
 
     }
 
-    Dialog d;
+    public void acceptMessage(Message m) {
 
-    public void setDialog(Dialog startDialog) {
-        this.d = startDialog;
+        Platform.runLater(() -> {
+            messages.add(m);
+            System.out.println(m.getId());
+        });
+
     }
+
 }

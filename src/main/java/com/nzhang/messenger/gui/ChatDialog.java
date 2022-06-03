@@ -19,7 +19,6 @@ public class ChatDialog {
 
     public void setImage(Image s) {
         this.image = s;
-
     }
 
 }

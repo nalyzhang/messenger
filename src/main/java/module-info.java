@@ -14,4 +14,5 @@ open module com.nzhang.messenger {
     requires spring.tx;
     requires java.desktop;
     requires spring.web;
+    requires org.json;
 }

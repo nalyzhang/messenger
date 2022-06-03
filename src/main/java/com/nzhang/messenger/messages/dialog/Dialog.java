@@ -1,5 +1,8 @@
 package com.nzhang.messenger.messages.dialog;
 
+import com.nzhang.messenger.Util;
+import javafx.scene.image.Image;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,8 @@ public class Dialog {
     // Data of sobesednik
 
     Long UID;
+
+    String currentAddress;
 
     public String getName() {
         return name;
@@ -40,16 +45,51 @@ public class Dialog {
     }
 
     public Dialog() {
+        this.messages = new ArrayList<>();
+    }
 
+    public Long getUID() {
+        return UID;
     }
 
     String name;
     String nickName;
-    //Image photo;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    byte[] photo;
+
     String bio;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "dialog",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     List<Message> messages;
+
+    public void setUID(Long UID) {
+        this.UID = UID;
+    }
+
+    public byte[] getPhotoByteArray() {
+        return photo;
+    }
+
+    public Image getPhoto() {
+        try {
+            Image im = Util.bytesToImage(this.photo);
+            System.out.println(im.getHeight());
+            return im;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
 
     public Dialog(Long UID) {
         this.UID = UID;

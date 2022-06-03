@@ -28,6 +28,9 @@ class Personality {
     Long UID;
     String name;
     String nickName;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     byte[] photo;
     String bio;
 
@@ -56,6 +59,10 @@ class Personality {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public byte[] getPhotoByteArray() {
+        return this.photo;
     }
 
     public void setPhoto(File photo) throws IOException {

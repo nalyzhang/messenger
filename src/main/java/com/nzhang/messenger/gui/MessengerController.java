@@ -14,8 +14,6 @@ public class MessengerController{
     public MenuBar btnHelp;
     public AnchorPane chatBox;
     public TextField findID;
-    TextArea enterMessage;
-
 
     Dialog d;
 
@@ -31,19 +29,24 @@ public class MessengerController{
                 String ip = String.valueOf(findID.getText());
                 findID.setText("");
                 System.out.println(ip);
+
+                Dialog d = MessengerApplication.dialogService.openDialog(ip);
+                this.d = d;
+
                 ChatDialog n = new ChatDialog();
-                n.setName(MessengerApplication.dialogService.startDialog(ip).getName());
-                ChatBox chatBox = new ChatBox(MessengerApplication.dialogService.startDialog(ip));
-                //chatBox.setDialog(MessengerApplication.serviceMessenger.startDialog(text));
-                chatBox.setChatName(MessengerApplication.dialogService.startDialog(ip).getName());
+                n.setName(d.getName());
+
+                ChatBox chatBox = new ChatBox(d);
+                chatBox.setDialog(d);
+
                 this.chatBox.getChildren().clear();
                 this.chatBox.getChildren().add(chatBox);
         }
-        if (butt.equals("btnSendMessage")){
-            String text = String.valueOf(enterMessage.getText());
-            System.out.println(text);
-            MessengerApplication.dialogService.sendMessage(this.d, new Message(text, 19));
-        }
+//        if (butt.equals("btnSendMessage")){
+//            String text = String.valueOf(enterMessage.getText());
+//            System.out.println(text);
+//            MessengerApplication.dialogService.sendMessage(this.d, new Message(text, (int)(System.currentTimeMillis() / 1000L)));
+//        }
     }
 
 }

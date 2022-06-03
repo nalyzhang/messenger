@@ -1,10 +1,10 @@
 package com.nzhang.messenger.messages.dialog;
 
 import com.nzhang.messenger.MessengerApplication;
+import com.nzhang.messenger.gui.ChatBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -14,7 +14,7 @@ public class DialogService {
     public DialogRepository dialogRepository;
 
     @Autowired
-    public DialogRepository messageRepository;
+    public MessageRepository messageRepository;
 
     public Dialog getDialog(long id){
         return this.dialogRepository.getById(id);
@@ -35,43 +35,71 @@ public class DialogService {
         return this.dialogRepository.findAll();
     }
 
-    public Dialog startDialog(String ip) {
+    public Dialog openDialog(String ip) {
 
         // 1. подключились по адресу
-        // предположим, что мы получили необходимую информацию
+        Dialog predialog = new Dialog();
+        predialog = MessengerApplication.clientService.getPersonality(ip, predialog);
+        predialog = MessengerApplication.clientService.getPhoto(ip, predialog);
+//
+//
+//        Long UID = 99L;
+//        String name = "Nobody";
+//        // ... и т.д.
 
-
-        Long UID = 99L;
-        String name = "Nobody";
-        // ... и т.д.
-
-        List<Dialog> dialogs = dialogRepository.findByUID(UID);
+        //
+        List<Dialog> dialogs = dialogRepository.findByUID(predialog.getUID());
         Dialog d;
         if (dialogs.size() == 0) {
             // если мы общаемся в первый раз, то создаем новый диалог
-            d = new Dialog(UID);
-            d.setName(name);
-            // TODO: заполняем всю информацию
-
-            d = dialogRepository.save(d);
-
+            d = dialogRepository.save(predialog);
         } else {
             d = dialogs.get(0);
+            d = MessengerApplication.clientService.getPersonality(ip, d);
+            d = dialogRepository.save(d);
         }
 
+        d.currentAddress = ip;
         return d;
 
     }
 
     public void sendMessage(Dialog d, Message m) {
-
-        d.messages.add(m);
-        this.dialogRepository.save(d);
-        // TODO: нам еще нужно отправить сообщение
-
+        try {
+            MessengerApplication.clientService.sendMessage(d.currentAddress, m.text);
+            d.messages.add(m);
+            this.messageRepository.save(m);
+            this.dialogRepository.save(d);
+        } catch (Exception e) {
+            System.out.println("failed to send message to " + d.currentAddress);
+        }
     }
 
     public List<Message> updateMessages(Dialog d) {
         return d.getMessages();
     }
+
+    public void acceptMessage(Long uid, String text) {
+        Dialog d = this.dialogRepository.findByUID(uid).get(0);
+        Message m = new Message();
+        //m.dialog = d;
+        m.text = text;
+        m.unixTime = (int) (System.currentTimeMillis() / 1000L);
+        d.messages.add(m);
+        this.messageRepository.save(m);
+        this.dialogRepository.save(d);
+
+        this.currentChatController.acceptMessage(m);
+
+    }
+
+
+
+
+    ChatBox currentChatController;
+
+    public void setChatBox(ChatBox d) {
+        this.currentChatController = d;
+    }
+
 }

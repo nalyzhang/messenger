@@ -1,5 +1,6 @@
 package com.nzhang.messenger;
 
+import com.nzhang.messenger.messages.ClientService;
 import com.nzhang.messenger.messages.dialog.DialogService;
 import com.nzhang.messenger.messages.personality.Personality;
 import com.nzhang.messenger.messages.personality.PersonalityService;
@@ -8,12 +9,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
-import org..boot.aspringframeworkutoconfigure.SpringBootApplication;
+//import org.spring.boot.aspringframeworkutoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
 @SpringBootApplication
+//@ComponentScan(basePackages = "com.nzhang.messenger")
+//@Configuration
 public class MessengerApplication extends Application {
 
     /*
@@ -43,6 +49,7 @@ public class MessengerApplication extends Application {
 
     public static DialogService dialogService = new DialogService();
     public static PersonalityService personalityService = new PersonalityService();
+    public static ClientService clientService = new ClientService();
 
     private static ApplicationContext context;
 
@@ -64,6 +71,7 @@ public class MessengerApplication extends Application {
 
         dialogService = context.getBean(DialogService.class);
         personalityService = context.getBean(PersonalityService.class);
+        clientService = context.getBean(ClientService.class);
 
         new TestInitializer().fillWithSampleData();
 
@@ -78,6 +86,12 @@ public class MessengerApplication extends Application {
 
     }
 
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        //context.close();
+    }
 
     public static void main(String[] args) {
         launch();
