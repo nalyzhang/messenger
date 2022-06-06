@@ -1,5 +1,6 @@
 package com.nzhang.messenger.messages.personality;
 
+import com.nzhang.messenger.gui.ProfileInfo;
 import com.nzhang.messenger.messages.dialog.DialogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,6 +41,12 @@ public class PersonalityService {
 
     public void reset() {
         this.personalityRepository.deleteAll();
+    }
+
+    ProfileInfo profileInfo = new ProfileInfo();
+
+    public void showMe(Personality me) {
+        profileInfo.setProfileInfo(me.getNickName(),me.getName(), me.getBio());
     }
 
 

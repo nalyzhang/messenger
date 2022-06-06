@@ -5,13 +5,14 @@ import com.nzhang.messenger.messages.dialog.Dialog;
 import com.nzhang.messenger.messages.dialog.Message;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Scanner;
 
 public class MessengerController{
 
-    public MenuBar btnHelp;
+
     public AnchorPane chatBox;
     public TextField findID;
 

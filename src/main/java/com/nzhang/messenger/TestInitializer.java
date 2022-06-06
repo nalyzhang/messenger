@@ -28,13 +28,14 @@ public class TestInitializer {
 
         }
         MessengerApplication.personalityService.saveMe(me);
+        MessengerApplication.personalityService.showMe(me);
 
 
 
 //        Dialog d = new Dialog(99L);
 //        d.setName("Кот-Бегемот");
 //        d.setNickName("Чёрт");
-//        d.setBio("Я - спутник Воланда и собрать Короьева... как же хочется его убить! :)");
+//        d.setBio("Я - спутник Воланда и собрат Короьева... как же хочется его убить! :) Мррр мяяяяу ^*^");
         // TODO: заполняем всю информацию
 
         //d = MessengerApplication.dialogService.dialogRepository.save(d);
