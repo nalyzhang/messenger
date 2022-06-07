@@ -23,7 +23,7 @@
                <children>
                   <Pane prefHeight="532.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="533.0" prefWidth="200.0" style="-fx-background-color: #F8B2A2;" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="menuTabPane" prefHeight="533.0" prefWidth="200.0" style="-fx-background-color: #F8B2A2;" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab text="Начать диалог">
                               <content>

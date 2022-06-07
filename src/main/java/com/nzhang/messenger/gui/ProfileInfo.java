@@ -4,9 +4,10 @@ package com.nzhang.messenger.gui;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 
-public class ProfileInfo extends TabPane {
+public class ProfileInfo extends AnchorPane {
     TextField nickName;
     TextField name;
     TextArea bio;
@@ -20,4 +21,13 @@ public class ProfileInfo extends TabPane {
             System.out.println("HELP! I'm so sad and empty :'(");
         }
     }
+
+    // TODO: добавить кнопку для сохранения
+    // MessengerApplication.personalityService.saveMe()
+
+    // TODO: (extra - после всех) - добавить (Google или зови меня) OpenFile
+    // https://docs.oracle.com/javafx/2/ui_controls/file-chooser.htm
+
+    // Me.setPhoto(new File()) <---- файл или ссылку на него вернет File Chooser
+
 }

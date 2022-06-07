@@ -90,9 +90,12 @@ public class ClientService {
             conn.setRequestMethod("POST");
             OutputStream os = conn.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-            osw.write("{\n" +
-                    "  \"uid\": " + MessengerApplication.personalityService.getMe().getUID() + ",\n" +
-                    "  \"text\": \"" + text + "\"}");
+
+            JSONObject r = new JSONObject();
+            r.put("uid", MessengerApplication.personalityService.getMe().getUID());
+            r.put("text", text);
+            osw.write(r.toString());
+
             osw.flush();
             osw.close();
             os.close();

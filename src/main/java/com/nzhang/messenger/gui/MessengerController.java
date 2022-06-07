@@ -3,19 +3,26 @@ package com.nzhang.messenger.gui;
 import com.nzhang.messenger.MessengerApplication;
 import com.nzhang.messenger.messages.dialog.Dialog;
 import com.nzhang.messenger.messages.dialog.Message;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class MessengerController{
+public class MessengerController implements Initializable {
 
 
     public AnchorPane chatBox;
     public TextField findID;
+
+    public TabPane menuTabPane;
 
     Dialog d;
 
@@ -51,4 +58,20 @@ public class MessengerController{
 //        }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        this.menuTabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                // если пользователь открыл вторую вкладку
+               if (newValue.equals(1)) {
+                   ((AnchorPane) menuTabPane.getTabs().get(1).getContent()).getChildren().clear();
+                   // TODO: убить детей (убили выше) - создать нового - это сцена изменения пользователя
+                   // загрузить туда пользователя из MessengerApplication.personalityService.getMe()
+
+               }
+            }
+        });
+    }
 }
