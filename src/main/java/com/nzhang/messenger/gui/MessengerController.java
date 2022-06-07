@@ -6,6 +6,7 @@ import com.nzhang.messenger.messages.dialog.Message;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Scanner;

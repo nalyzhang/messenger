@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 //import org.spring.boot.aspringframeworkutoconfigure.SpringBootApplication;
@@ -16,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import javax.imageio.ImageIO;
 import java.io.IOException;
 
 @SpringBootApplication
@@ -48,7 +50,7 @@ public class MessengerApplication extends Application {
 
     */
 
-    public Image scenePicture;
+    public ImageView scenePicture = new ImageView();
     public static DialogService dialogService = new DialogService();
     public static PersonalityService personalityService = new PersonalityService();
     public static ClientService clientService = new ClientService();
@@ -77,7 +79,9 @@ public class MessengerApplication extends Application {
 
         new TestInitializer().fillWithSampleData();
 
-        this.scenePicture = new Image(String.valueOf(getClass().getResource("kjeg.png")));
+        Image image = new Image(String.valueOf(getClass().getResource("kjeg.png")));
+        this.scenePicture.setImage(image);
+
         FXMLLoader fxmlLoader = new FXMLLoader(MessengerApplication.class.getResource("messengerMainScene.fxml"));
         System.out.println(fxmlLoader.getLocation());
         Scene scene = new Scene(fxmlLoader.load(), 760, 560);

@@ -31,18 +31,18 @@ public class TestInitializer {
         MessengerApplication.personalityService.showMe(me);
 
 
-
 //        Dialog d = new Dialog(99L);
 //        d.setName("Кот-Бегемот");
 //        d.setNickName("Чёрт");
 //        d.setBio("Я - спутник Воланда и собрат Короьева... как же хочется его убить! :) Мррр мяяяяу ^*^");
-        // TODO: заполняем всю информацию
-
-        //d = MessengerApplication.dialogService.dialogRepository.save(d);
-        //MessengerApplication.dialogService.sendMessage(d, new Message("Выпьем кофейку?", 11));
-        //MessengerApplication.dialogService.sendMessage(d, new Message("AAAAAAAAAAAA", 12));
-
-        //MessengerApplication.dialogService.openDialog("99L");
+//         //TODO: заполняем всю информацию
+//
+//        d = MessengerApplication.dialogService.dialogRepository.save(d);
+//        MessengerApplication.dialogService.sendMessage(d, new Message("Выпьем кофейку?", 11));
+//        MessengerApplication.dialogService.sendMessage(d, new Message("AAAAAAAAAAAA", 12));
+//
+//        MessengerApplication.dialogService.openDialog("99L");
+//
 
     }
 }
