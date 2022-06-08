@@ -82,7 +82,7 @@ public class MessengerApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MessengerApplication.class.getResource("messengerMainScene.fxml"));
         System.out.println(fxmlLoader.getLocation());
         Scene scene = new Scene(fxmlLoader.load(), 760, 560);
-        stage.setTitle("название не определено бип-боп");
+        stage.setTitle("AnonymousHedgehog");
         stage.setScene(scene);
         stage.show();
 

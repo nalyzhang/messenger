@@ -16,7 +16,7 @@
                <children>
                   <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="353.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="23.0" />
                   <TextArea fx:id="messageText" layoutX="41.0" layoutY="28.0" prefHeight="38.0" prefWidth="358.0" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="28.0" />
-                  <Rectangle  arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="38.0" layoutX="17.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="358.0" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="76.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="38.0" layoutX="17.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="358.0" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="76.0" />
                </children>
             </AnchorPane>
          </children>
