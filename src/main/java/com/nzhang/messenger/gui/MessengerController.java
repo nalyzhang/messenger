@@ -3,6 +3,7 @@ package com.nzhang.messenger.gui;
 import com.nzhang.messenger.MessengerApplication;
 import com.nzhang.messenger.messages.dialog.Dialog;
 import com.nzhang.messenger.messages.dialog.Message;
+import com.nzhang.messenger.messages.personality.Personality;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -22,9 +23,18 @@ public class MessengerController implements Initializable {
     public AnchorPane chatBox;
     public TextField findID;
 
+    public ImageView scenePicture;
+
     public TabPane menuTabPane;
+    public Button changePhoto;
+    public Button saveChanges;
+    public TextArea bio;
+    public TextField name;
+    public TextField nickName;
 
     Dialog d;
+
+    public ProfileInfo profileInfo;
 
 
     public void operationClicked(ActionEvent actionEvent) {
@@ -33,8 +43,8 @@ public class MessengerController implements Initializable {
         Button b = (Button) actionEvent.getSource();
         String butt = b.idProperty().getValue();
 
-
-        if (butt.equals("startDialog")){
+        switch (butt) {
+            case "startDialog":
                 String ip = String.valueOf(findID.getText());
                 findID.setText("");
                 System.out.println(ip);
@@ -50,6 +60,13 @@ public class MessengerController implements Initializable {
 
                 this.chatBox.getChildren().clear();
                 this.chatBox.getChildren().add(chatBox);
+                break;
+            case "saveChanges":
+                String nameText = name.getText();
+                String nickNameText = nickName.getText();
+                String bioText = bio.getText();
+                profileInfo.saveChanges(nickNameText,nameText,bioText);
+                break;
         }
 //        if (butt.equals("btnSendMessage")){
 //            String text = String.valueOf(enterMessage.getText());
@@ -61,15 +78,18 @@ public class MessengerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+        this.scenePicture.setImage(new Image(String.valueOf(getClass().getResource("kjeg.png"))));
+
         this.menuTabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
                 // если пользователь открыл вторую вкладку
                if (newValue.equals(1)) {
                    ((AnchorPane) menuTabPane.getTabs().get(1).getContent()).getChildren().clear();
-                   // TODO: убить детей (убили выше) - создать нового - это сцена изменения пользователя
+                   // убить детей (убили выше) - создать нового - это сцена изменения пользователя
                    // загрузить туда пользователя из MessengerApplication.personalityService.getMe()
-
+                   MessengerApplication.personalityService.showMe();
                }
             }
         });

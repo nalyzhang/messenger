@@ -31,6 +31,15 @@ public class PersonalityService {
         }
     }
 
+    public void editMe(String nickName,String name, String bio) {
+        Personality me = getMe();
+        me.bio = bio;
+        me.name = name;
+        me.nickName = nickName;
+        this.personalityRepository.save(me);
+
+    }
+
     public void saveMe(Personality me) {
         if (getMe().id == me.id) {
             this.personalityRepository.save(me);
@@ -45,8 +54,8 @@ public class PersonalityService {
 
     ProfileInfo profileInfo = new ProfileInfo();
 
-    public void showMe(Personality me) {
-        profileInfo.setProfileInfo(me.getNickName(),me.getName(), me.getBio());
+    public void showMe() {
+        profileInfo.setProfileInfo();
     }
 
 

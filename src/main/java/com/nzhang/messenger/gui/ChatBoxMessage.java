@@ -3,7 +3,7 @@ package com.nzhang.messenger.gui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -18,7 +18,7 @@ public class ChatBoxMessage extends Pane implements Initializable {
     HBox messageBox;
 
     @FXML
-    TextField messageText;
+    TextArea messageText;
 
     @FXML
     Image avatar;
@@ -38,7 +38,7 @@ public class ChatBoxMessage extends Pane implements Initializable {
 
     void setTextFrom(boolean b, String text) {
         if (!b) {
-            this.messageBox.getChildren().get(0).toFront();
+            this.messageBox.getChildren().get(0).toBack();
         }
         messageText.setText(text);
     }

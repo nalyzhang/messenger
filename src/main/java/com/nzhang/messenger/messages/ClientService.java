@@ -27,7 +27,6 @@ public class ClientService {
             dialog.setUID(response.getLong("UID"));
             return dialog;
         } catch (Exception e) {
-            // TODO:
             throw new RuntimeException("Не удалось подключиться к пользователю по адресу: " + address, e);
         }
     }
