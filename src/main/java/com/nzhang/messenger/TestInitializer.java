@@ -28,7 +28,6 @@ public class TestInitializer {
 
         }
         MessengerApplication.personalityService.saveMe(me);
-        MessengerApplication.personalityService.showMe();
 
 
 //        Dialog d = new Dialog(99L);

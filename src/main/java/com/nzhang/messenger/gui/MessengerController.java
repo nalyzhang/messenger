@@ -61,12 +61,6 @@ public class MessengerController implements Initializable {
                 this.chatBox.getChildren().clear();
                 this.chatBox.getChildren().add(chatBox);
                 break;
-            case "saveChanges":
-                String nameText = name.getText();
-                String nickNameText = nickName.getText();
-                String bioText = bio.getText();
-                profileInfo.saveChanges(nickNameText,nameText,bioText);
-                break;
         }
 //        if (butt.equals("btnSendMessage")){
 //            String text = String.valueOf(enterMessage.getText());
@@ -89,7 +83,10 @@ public class MessengerController implements Initializable {
                    ((AnchorPane) menuTabPane.getTabs().get(1).getContent()).getChildren().clear();
                    // убить детей (убили выше) - создать нового - это сцена изменения пользователя
                    // загрузить туда пользователя из MessengerApplication.personalityService.getMe()
-                   MessengerApplication.personalityService.showMe();
+                   ProfileInfo c = new ProfileInfo();
+
+                   ((AnchorPane) menuTabPane.getTabs().get(1).getContent()).getChildren().add(c);
+
                }
             }
         });

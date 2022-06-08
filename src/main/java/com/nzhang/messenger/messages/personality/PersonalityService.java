@@ -52,12 +52,6 @@ public class PersonalityService {
         this.personalityRepository.deleteAll();
     }
 
-    ProfileInfo profileInfo = new ProfileInfo();
-
-    public void showMe() {
-        profileInfo.setProfileInfo();
-    }
-
 
 
 }

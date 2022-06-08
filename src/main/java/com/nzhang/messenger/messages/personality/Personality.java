@@ -25,14 +25,14 @@ class Personality {
 
     // уникальный ID пользователя, который мы создаем, когда самый первый раз
     // входим в программу
-    Long UID;
-    String name;
-    String nickName;
+    Long UID = 0L;
+    String name = "";
+    String nickName = "";
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
     byte[] photo;
-    String bio;
+    String bio = "";
 
     public String getName() {
         return name;
@@ -51,6 +51,9 @@ class Personality {
     }
 
     public Image getPhoto() {
+        if (this.photo == null) {
+            return null;
+        }
         try {
             Image im = Util.bytesToImage(this.photo);
             System.out.println(im.getHeight());
