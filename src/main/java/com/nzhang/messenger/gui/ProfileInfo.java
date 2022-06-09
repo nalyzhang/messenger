@@ -65,14 +65,6 @@ public class ProfileInfo extends AnchorPane implements Initializable {
         saveChanges(nickNameText,nameText,bioText);
     }
 
-    Desktop desktop = Desktop.getDesktop();
-    private void openFile(File file) {
-        try {
-            desktop.open(file);
-        } catch (IOException ex) {
-            System.out.println("exception");
-        }
-    }
 
     public void onChangePhotoClicked() {
         Personality me = MessengerApplication.personalityService.getMe();
