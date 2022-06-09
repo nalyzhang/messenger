@@ -46,7 +46,7 @@ public class ServerController {
     @PostMapping(value = "/sendMessage")
     @ResponseStatus(HttpStatus.CREATED)
     public void sendMessage(@RequestBody Message input) {
-        MessengerApplication.dialogService.acceptMessage(input.uid, input.text, input.fromMe);
+        MessengerApplication.dialogService.acceptMessage(input.uid, input.text);
         System.out.println(input.text + " | from " + String.valueOf(input.uid));
     }
 
