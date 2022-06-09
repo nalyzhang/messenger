@@ -17,17 +17,23 @@ public class TestInitializer {
         // Для демонстрационных целей очистим профиль текущего пользователя
         // и заполним с чистого листа
 
-        MessengerApplication.personalityService.reset();
-        Personality me = MessengerApplication.personalityService.createMe();
-        me.setName("Маргарита");
-        me.setBio("По жизни синдром спасателя...");
-        me.setNickName("margarita");
-        try {
-            me.setPhoto(new File(MessengerApplication.class.getResource("pics/margarita.png").getFile()));
-        } catch (Exception e) {
+        //MessengerApplication.personalityService.reset();
 
+        try {
+            Personality me = MessengerApplication.personalityService.getMe();
+        } catch (Exception e) {
+            Personality me = MessengerApplication.personalityService.createMe();
+            me.setName("Маргарита");
+            me.setBio("По жизни синдром спасателя...");
+            me.setNickName("margarita");
+            try {
+                me.setPhoto(new File(MessengerApplication.class.getResource("pics/margarita.png").getFile()));
+            } catch (Exception ex) {
+
+            }
+            MessengerApplication.personalityService.saveMe(me);
         }
-        MessengerApplication.personalityService.saveMe(me);
+
 
 
 //        Dialog d = new Dialog(99L);

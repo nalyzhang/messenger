@@ -44,60 +44,48 @@ public class ProfileInfo extends AnchorPane implements Initializable {
         }
 
     }
-    
+
     public void setProfileInfo() {
         Personality me = MessengerApplication.personalityService.getMe();
-        if (this.nickName != null) {
-            this.id.setText(String.valueOf(me.getUID()));
-            this.nickName.setText(me.getNickName());
-            this.nameTextField.setText(me.getName());
-            this.bio.setText(me.getBio());
-            this.image.setImage(me.getPhoto());
-        } else {
-            System.out.println("HELP! I'm so sad and empty :'(");
-        }
+
+        this.nickName.setText(me.getNickName());
+        this.id.setText(String.valueOf(me.getUID()));
+        this.nickName.setText(me.getNickName());
+        this.nameTextField.setText(me.getName());
+        this.bio.setText(me.getBio());
+        this.image.setImage(me.getPhoto());
+
     }
 
     public void onSaveButtonClicked() {
         String nameText = nameTextField.getText();
         String nickNameText = nickName.getText();
         String bioText = bio.getText();
-        saveChanges(nickNameText,nameText,bioText);
+        saveChanges(nickNameText, nameText, bioText);
     }
 
-    Desktop desktop = Desktop.getDesktop();
-    private void openFile(File file) {
-        try {
-            desktop.open(file);
-        } catch (IOException ex) {
-            System.out.println("exception");
-        }
-    }
 
     public void onChangePhotoClicked() {
         Personality me = MessengerApplication.personalityService.getMe();
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setTitle("Open Resource File");
-        fileChooser.showOpenDialog(stage);
         System.out.println("change photo");
-        new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent e) {
-                File file = fileChooser.showOpenDialog(stage);
-                if (file != null) {
-                    try {
-                        me.setPhoto(file);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            try {
+                me.setPhoto(file);
+                MessengerApplication.personalityService.saveMe(me);
+                this.setProfileInfo();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        };
+        }
     }
 
     public void saveChanges(String nickName, String name, String bio) {
-        MessengerApplication.personalityService.editMe(nickName,name,bio);
+        MessengerApplication.personalityService.editMe(nickName, name, bio);
         setProfileInfo();
     }
 
