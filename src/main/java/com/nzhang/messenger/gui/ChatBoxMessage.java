@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ChatBoxMessage extends Pane implements Initializable {
+public class ChatBoxMessage extends HBox implements Initializable {
     @FXML
     HBox messageBox;
 
@@ -40,7 +40,7 @@ public class ChatBoxMessage extends Pane implements Initializable {
 
     }
 
-    void setTextFrom(boolean b, String text) {
+    void setTextFrom(boolean b, String text /* Dialog ... */) {
         messageText.setText(text);
 
     }
