@@ -106,8 +106,7 @@ public class ChatBox extends Pane implements Initializable {
 //                    String text = String.valueOf(enterMessage.getText());
 //                    enterMessage.setText("");
 //                    System.out.println(text);
-
-                    chatBoxMessage.setTextFrom(item.isFromMe(), item.getText(), getDialogName());
+                    chatBoxMessage.setTextFrom(item.isFromMe(), item.getText(), item.getDialog());
                     setGraphic(chatBoxMessage);
                 }
             };

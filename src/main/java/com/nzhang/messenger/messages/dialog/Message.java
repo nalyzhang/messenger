@@ -16,6 +16,10 @@ class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    public Dialog getDialog() {
+        return dialog;
+    }
+
     String text;
     int unixTime;
 

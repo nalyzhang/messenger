@@ -94,9 +94,6 @@ public class DialogService {
 
     }
 
-
-
-
     ChatBox currentChatController;
 
     public void setChatBox(ChatBox d) {
