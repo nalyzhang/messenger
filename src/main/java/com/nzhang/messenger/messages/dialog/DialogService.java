@@ -82,7 +82,7 @@ public class DialogService {
     public void acceptMessage(Long uid, String text) {
         Dialog d = this.dialogRepository.findByUID(uid).get(0);
         Message m = new Message();
-        //m.dialog = d;
+        m.dialog = d;
         m.text = text;
         m.unixTime = (int) (System.currentTimeMillis() / 1000L);
         d.messages.add(m);

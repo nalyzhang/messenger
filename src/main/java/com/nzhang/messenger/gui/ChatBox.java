@@ -111,12 +111,13 @@ public class ChatBox extends Pane implements Initializable {
 
         this.btnSendMessage.setOnAction(event -> {
 
-            String text = String.valueOf(enterMessage.getText());
+            String beginText = String.valueOf(MessengerApplication.personalityService.getMe().getName());
+            String mainText = String.valueOf(enterMessage.getText());
+            String text = beginText + ": " + mainText;
             System.out.println(text);
-
             Message m = new Message(text, (int)(System.currentTimeMillis() / 1000L));
             MessengerApplication.dialogService.sendMessage(this.d, m);
-
+            enterMessage.setText("");
             this.messages.add(m);
 
         });

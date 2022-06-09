@@ -1,5 +1,7 @@
 package com.nzhang.messenger.gui;
 
+import com.nzhang.messenger.MessengerApplication;
+import com.nzhang.messenger.messages.personality.Personality;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +25,8 @@ public class ChatBoxMessage extends Pane implements Initializable {
     @FXML
     Image avatar;
 
+
+
     ChatBoxMessage() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("chatTextFromMe.fxml"));
@@ -37,10 +41,8 @@ public class ChatBoxMessage extends Pane implements Initializable {
     }
 
     void setTextFrom(boolean b, String text) {
-        if (!b) {
-            this.messageBox.getChildren().get(0).toBack();
-        }
         messageText.setText(text);
+
     }
 
 

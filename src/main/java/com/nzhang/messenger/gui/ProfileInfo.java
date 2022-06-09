@@ -3,6 +3,8 @@ package com.nzhang.messenger.gui;
 
 import com.nzhang.messenger.MessengerApplication;
 import com.nzhang.messenger.messages.personality.Personality;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -10,9 +12,16 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ProfileInfo extends AnchorPane implements Initializable {
@@ -56,8 +65,35 @@ public class ProfileInfo extends AnchorPane implements Initializable {
         saveChanges(nickNameText,nameText,bioText);
     }
 
+    Desktop desktop = Desktop.getDesktop();
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+            System.out.println("exception");
+        }
+    }
+
     public void onChangePhotoClicked() {
+        Personality me = MessengerApplication.personalityService.getMe();
+        FileChooser fileChooser = new FileChooser();
+        Stage stage = new Stage();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.showOpenDialog(stage);
         System.out.println("change photo");
+        new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(final ActionEvent e) {
+                File file = fileChooser.showOpenDialog(stage);
+                if (file != null) {
+                    try {
+                        me.setPhoto(file);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        };
     }
 
     public void saveChanges(String nickName, String name, String bio) {

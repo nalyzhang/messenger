@@ -73,7 +73,7 @@ public class MessengerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        this.scenePicture.setImage(new Image(String.valueOf(getClass().getResource("kjeg.png"))));
+        this.scenePicture.setImage(new Image(String.valueOf(getClass().getResource("scenePhoto.png"))));
 
         this.menuTabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
