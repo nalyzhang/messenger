@@ -45,10 +45,15 @@ public class ChatBoxMessage extends HBox implements Initializable {
 
     }
 
-    void setTextFrom(boolean b, String text) {
+    void setTextFrom(boolean b, String text, String d) {
         messageText.setText(text);
-        avatar = MessengerApplication.personalityService.getMe().getPhoto();
-        nameOfUser.setText(MessengerApplication.personalityService.getMe().getName());
+        if (b) {
+            avatar = MessengerApplication.personalityService.getMe().getPhoto();
+            nameOfUser.setText(MessengerApplication.personalityService.getMe().getName());
+        } else {
+            avatar = null;
+            nameOfUser.setText(d);
+        }
     }
 
 

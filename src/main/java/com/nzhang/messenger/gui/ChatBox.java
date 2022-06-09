@@ -80,6 +80,10 @@ public class ChatBox extends Pane implements Initializable {
 
     }
 
+    public String getDialogName() {
+        return this.d.getName();
+    }
+
 
 
     @Override
@@ -102,7 +106,8 @@ public class ChatBox extends Pane implements Initializable {
 //                    String text = String.valueOf(enterMessage.getText());
 //                    enterMessage.setText("");
 //                    System.out.println(text);
-                    chatBoxMessage.setTextFrom(item.isFromMe(), item.getText());
+
+                    chatBoxMessage.setTextFrom(item.isFromMe(), item.getText(), getDialogName());
                     setGraphic(chatBoxMessage);
                 }
             };
