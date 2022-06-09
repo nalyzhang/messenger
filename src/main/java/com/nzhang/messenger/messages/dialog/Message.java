@@ -19,6 +19,16 @@ class Message {
     String text;
     int unixTime;
 
+    public boolean isFromMe() {
+        return fromMe;
+    }
+
+    public void setFromMe(boolean fromMe) {
+        this.fromMe = fromMe;
+    }
+
+    boolean fromMe;
+
     @ManyToOne(fetch = FetchType.LAZY)
     Dialog dialog;
 
@@ -35,9 +45,10 @@ class Message {
         return unixTime;
     }
 
-    public Message(String text, int unixTime) {
+    public Message(String text, int unixTime, boolean fromMe) {
         this.text = text;
         this.unixTime = unixTime;
+        this.fromMe = fromMe;
     }
 
     @Override
