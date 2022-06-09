@@ -5,6 +5,8 @@ import com.nzhang.messenger.messages.personality.Personality;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -25,6 +27,9 @@ public class ChatBoxMessage extends HBox implements Initializable {
     @FXML
     Image avatar;
 
+    @FXML
+    Label nameOfUser;
+
 
 
     ChatBoxMessage() {
@@ -40,9 +45,10 @@ public class ChatBoxMessage extends HBox implements Initializable {
 
     }
 
-    void setTextFrom(boolean b, String text /* Dialog ... */) {
+    void setTextFrom(boolean b, String text) {
         messageText.setText(text);
-
+        avatar = MessengerApplication.personalityService.getMe().getPhoto();
+        nameOfUser.setText(MessengerApplication.personalityService.getMe().getName());
     }
 
 

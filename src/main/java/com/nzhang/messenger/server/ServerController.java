@@ -18,6 +18,7 @@ class PersonalInformation {
 class Message {
     public long uid;
     public String text;
+    public boolean fromMe;
 }
 
 @RestController
@@ -45,7 +46,7 @@ public class ServerController {
     @PostMapping(value = "/sendMessage")
     @ResponseStatus(HttpStatus.CREATED)
     public void sendMessage(@RequestBody Message input) {
-        MessengerApplication.dialogService.acceptMessage(input.uid, input.text);
+        MessengerApplication.dialogService.acceptMessage(input.uid, input.text, input.fromMe);
         System.out.println(input.text + " | from " + String.valueOf(input.uid));
     }
 

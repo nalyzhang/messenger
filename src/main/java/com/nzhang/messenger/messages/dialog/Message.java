@@ -27,7 +27,7 @@ class Message {
         this.fromMe = fromMe;
     }
 
-    boolean fromMe;
+    boolean fromMe = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     Dialog dialog;
