@@ -1,14 +1,15 @@
 package com.nzhang.messenger.gui;
 
 import com.nzhang.messenger.MessengerApplication;
-import com.nzhang.messenger.messages.dialog.Dialog;
 import com.nzhang.messenger.messages.personality.Personality;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -25,7 +26,7 @@ public class ChatBoxMessage extends HBox implements Initializable {
     TextArea messageText;
 
     @FXML
-    Image avatar;
+    ImageView avatar;
 
     @FXML
     Label nameOfUser;
@@ -45,14 +46,14 @@ public class ChatBoxMessage extends HBox implements Initializable {
 
     }
 
-    void setTextFrom(boolean b, String text, Dialog d) {
+    void setTextFrom(boolean b, String text, String d, Image a) {
         messageText.setText(text);
         if (b) {
-            avatar = MessengerApplication.personalityService.getMe().getPhoto();
+            avatar.setImage(MessengerApplication.personalityService.getMe().getPhoto());
             nameOfUser.setText(MessengerApplication.personalityService.getMe().getName());
         } else {
-            avatar = null;
-            nameOfUser.setText(d.getName());
+            avatar.setImage(a);
+            nameOfUser.setText(d);
         }
     }
 

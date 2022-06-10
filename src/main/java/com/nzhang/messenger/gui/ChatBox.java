@@ -14,12 +14,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChatBox extends Pane implements Initializable {
+public class ChatBox extends AnchorPane implements Initializable {
 
     @FXML
     Label chatName;
@@ -83,6 +84,10 @@ public class ChatBox extends Pane implements Initializable {
     public String getDialogName() {
         return this.d.getName();
     }
+    public Image getDialogPhoto() {
+        return this.d.getPhoto();
+    }
+
 
 
 
@@ -106,7 +111,8 @@ public class ChatBox extends Pane implements Initializable {
 //                    String text = String.valueOf(enterMessage.getText());
 //                    enterMessage.setText("");
 //                    System.out.println(text);
-                    chatBoxMessage.setTextFrom(item.isFromMe(), item.getText(), item.getDialog());
+
+                    chatBoxMessage.setTextFrom(item.isFromMe(), item.getText(), getDialogName(), getDialogPhoto());
                     setGraphic(chatBoxMessage);
                 }
             };
